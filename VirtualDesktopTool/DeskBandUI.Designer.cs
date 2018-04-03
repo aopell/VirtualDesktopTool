@@ -42,7 +42,7 @@
             this.desktopLabel.TabIndex = 1;
             this.desktopLabel.Text = "Desktop 1";
             this.desktopLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.desktopLabel.Click += new System.EventHandler(this.labelSearch_Click);
+            this.desktopLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.desktopLabel_MouseClick);
             // 
             // DeskBandUI
             // 

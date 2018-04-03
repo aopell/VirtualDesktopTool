@@ -21,12 +21,6 @@ namespace WebSearchDeskBand
             InitializeComponent();
         }
 
-        private void labelSearch_Click(object sender, EventArgs e)
-        {
-            new ChangeName().ShowDialog();
-            UpdateDisplay(VirtualDesktop.Current);
-        }
-
         private void DeskBandUI_Load(object sender, EventArgs e)
         {
             VirtualDesktop.CurrentChanged += VirtualDesktop_CurrentChanged;
@@ -66,8 +60,29 @@ namespace WebSearchDeskBand
 
             float newSize = label.Font.Size * ratio;
 
-            label.Font = new Font(label.Font.FontFamily, newSize, label.Font.Style);
+            label.Font = new Font(label.Font.FontFamily, Math.Min(newSize, 12.5f), label.Font.Style);
 
+        }
+
+        private void desktopLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                case MouseButtons.Right:
+                    new ChangeName().ShowDialog();
+                    UpdateDisplay(VirtualDesktop.Current);
+                    break;
+                case MouseButtons.Middle:
+                    VirtualDesktop.Current.Remove();
+                    break;
+                case MouseButtons.XButton1:
+                    (VirtualDesktop.Current.GetLeft() ?? VirtualDesktop.GetDesktops().Last()).Switch();
+                    break;
+                case MouseButtons.XButton2:
+                    (VirtualDesktop.Current.GetRight() ?? VirtualDesktop.GetDesktops()[0]).Switch();
+                    break;
+            }
         }
     }
 }
