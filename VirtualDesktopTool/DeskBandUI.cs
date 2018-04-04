@@ -23,10 +23,23 @@ namespace WebSearchDeskBand
 
         private void DeskBandUI_Load(object sender, EventArgs e)
         {
+            desktopLabel.MouseWheel += DesktopLabel_MouseWheel;
             VirtualDesktop.CurrentChanged += VirtualDesktop_CurrentChanged;
             VirtualDesktop.Destroyed += VirtualDesktop_Destroyed;
             VirtualDesktop.Created += VirtualDesktop_Created;
             UpdateDisplay(VirtualDesktop.Current);
+        }
+
+        private void DesktopLabel_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                (VirtualDesktop.Current.GetRight() ?? VirtualDesktop.GetDesktops()[0]).Switch();
+            }
+            else if (e.Delta < 0)
+            {
+                (VirtualDesktop.Current.GetLeft() ?? VirtualDesktop.GetDesktops().Last()).Switch();
+            }
         }
 
         private void VirtualDesktop_Created(object sender, VirtualDesktop e)
