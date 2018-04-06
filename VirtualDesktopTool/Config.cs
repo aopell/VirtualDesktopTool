@@ -35,7 +35,7 @@ namespace WebSearchDeskBand
 
                 if (!File.Exists(dirPath + "config.json"))
                 {
-                    File.Create("config.json").Dispose();
+                    File.Create(dirPath + "config.json").Dispose();
                 }
 
                 Tools.Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(dirPath + "config.json")) ?? new Config();
