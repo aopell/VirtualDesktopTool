@@ -1,0 +1,15 @@
+﻿<Window x:Class="VirtualDesktopTool2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VirtualDesktopTool2"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="497" Width="662">
+    <Grid>
+        <Button Content="Generate Toolbar Folder" Click="SelectToolbarFolder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Height="29"/>
+        <Label x:Name="FolderPathLabel" Content="No Folder Selected" Margin="223,12,10,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
