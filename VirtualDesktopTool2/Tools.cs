@@ -7,6 +7,7 @@ namespace VirtualDesktopTool2
 {
     public static class Tools
     {
+        public const string ToolbarDirectory = "Virtual Desktops";
         public static void CreateShortcut(string name, string directory, string target, string arguments, WindowStyle style, string description, string iconPath)
         {
             string shortcutLocation = System.IO.Path.Combine(directory, name + ".lnk");

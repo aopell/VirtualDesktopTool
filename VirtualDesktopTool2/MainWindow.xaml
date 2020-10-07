@@ -9,7 +9,5 @@
         Title="MainWindow" Height="497" Width="662">
     <Grid>
         <Button Content="Generate Toolbar Folder" Click="SelectToolbarFolder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Height="29"/>
-        <Label x:Name="FolderPathLabel" Content="No Folder Selected" Margin="223,12,10,0" VerticalAlignment="Top"/>
-
     </Grid>
 </Window>

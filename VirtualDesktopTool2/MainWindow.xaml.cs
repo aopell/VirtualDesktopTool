@@ -13,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WindowsDesktop;
 using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
@@ -32,26 +31,58 @@ namespace VirtualDesktopTool2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            VirtualDesktop.Created += UpdateToolbar;
+            if (!Directory.Exists(Tools.ToolbarDirectory))
+            {
+                Directory.CreateDirectory(Tools.ToolbarDirectory);
+            }
+
+            VirtualDesktop.Created += VirtualDesktop_Created;
+            VirtualDesktop.Destroyed += VirtualDesktop_Destroyed;
+            VirtualDesktop.CurrentChanged += VirtualDesktop_CurrentChanged;
+
+            UpdateToolbar();
+
+            Tools.CreateShortcut("Test",
+                                 "D:\\aaron\\Documents\\GitHub\\VirtualDesktopTool\\VirtualDesktopTool2\\bin\\Release\\netcoreapp3.1\\Virtual Desktops",
+                                 "notepad.exe",
+                                 "",
+                                 Tools.WindowStyle.Normal,
+                                 "Test thing",
+                                 @"D:\aaron\Documents\GitHub\VirtualDesktopTool\VirtualDesktopTool2\bin\Release\netcoreapp3.1\Icons\desktop.ico"
+            );
         }
 
-        private void UpdateToolbar(object sender, VirtualDesktop e)
-        {
+        private void VirtualDesktop_CurrentChanged(object sender, VirtualDesktopChangedEventArgs e) => UpdateToolbar();
+        private void VirtualDesktop_Destroyed(object sender, VirtualDesktopDestroyEventArgs e) => UpdateToolbar();
+        private void VirtualDesktop_Created(object sender, VirtualDesktop e) => UpdateToolbar();
 
+        private void UpdateToolbar()
+        {
+            var desktops = VirtualDesktop.GetDesktops();
+            var nums = Enumerable.Range(1, desktops.Length).ToArray();
+
+            foreach (int n in nums)
+            {
+                Tools.CreateShortcut(n.ToString(),
+                                     Path.GetFullPath(Tools.ToolbarDirectory),
+                                     "dotnet.exe",
+                                     $"\"{Assembly.GetExecutingAssembly().Location}\" {n}",
+                                     Tools.WindowStyle.Minimized,
+                                     $"Desktop {n}",
+                                     Path.GetFullPath($"Icons\\{(n <= 10 ? n.ToString() : "desktop")}.ico")
+                );
+            }
+
+            var keepFiles = nums.Select(n => $"{n}.lnk").ToList();
+            foreach (string file in Directory.GetFiles(Tools.ToolbarDirectory).Where(f => !keepFiles.Contains(Path.GetFileName(f))))
+            {
+                File.Delete(file);
+            }
         }
 
         private void SelectToolbarFolder(object sender, RoutedEventArgs e)
         {
-            VistaFolderBrowserDialog folderBrowserDialog = new VistaFolderBrowserDialog();
-            folderBrowserDialog.Description = "Create an empty folder which will be used to create the taskbar toolbar";
-            folderBrowserDialog.ShowDialog();
 
-            if (Directory.GetFiles(folderBrowserDialog.SelectedPath).Length > 0)
-            {
-                MessageBox.Show("Please select an empty folder");
-            }
-
-            FolderPathLabel.Content = folderBrowserDialog.SelectedPath;
         }
     }
 }
