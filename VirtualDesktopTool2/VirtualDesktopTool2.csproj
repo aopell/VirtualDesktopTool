@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.0" />
-    <PackageReference Include="VirtualDesktop" Version="4.0.1" />
+    <ProjectReference Include="..\VirtualDesktop\source\VirtualDesktop\VirtualDesktop.csproj" />
   </ItemGroup>
 
   <ItemGroup>

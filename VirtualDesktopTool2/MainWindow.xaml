@@ -8,6 +8,6 @@
         Loaded="Window_Loaded"
         Title="MainWindow" Height="497" Width="662">
     <Grid>
-        <Button Content="Generate Toolbar Folder" Click="SelectToolbarFolder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Height="29"/>
+        <Button Content="Open Toolbar Folder" Click="SelectToolbarFolder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Height="29"/>
     </Grid>
 </Window>
