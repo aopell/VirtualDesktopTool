@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,6 +25,8 @@ namespace VirtualDesktopTool2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<VirtualDesktopControl> DesktopControls { get; } = new List<VirtualDesktopControl>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,10 +39,25 @@ namespace VirtualDesktopTool2
                 Directory.CreateDirectory(Tools.ToolbarDirectory);
             }
 
+            DesktopControls.Add(Desktop1);
+            DesktopControls.Add(Desktop2);
+            DesktopControls.Add(Desktop3);
+            DesktopControls.Add(Desktop4);
+            DesktopControls.Add(Desktop5);
+            DesktopControls.Add(Desktop6);
+            DesktopControls.Add(Desktop7);
+            DesktopControls.Add(Desktop8);
+            DesktopControls.Add(Desktop9);
+            DesktopControls.Add(Desktop10);
+
             VirtualDesktop.Created += VirtualDesktop_Created;
             VirtualDesktop.Destroyed += VirtualDesktop_Destroyed;
             VirtualDesktop.CurrentChanged += VirtualDesktop_CurrentChanged;
             VirtualDesktop.Renamed += VirtualDesktop_Renamed;
+
+            Timer timer = new Timer(100);
+            timer.Elapsed += async (ss, ee) => Dispatcher.Invoke(UpdateToolbar);
+            timer.Start();
 
             UpdateToolbar();
         }
@@ -56,24 +74,26 @@ namespace VirtualDesktopTool2
 
             foreach (int n in nums)
             {
-                Tools.CreateShortcut($"{n} - {desktops[n - 1].Name}",
+                DesktopControls[n - 1].UpdateLayout();
+
+                Tools.CreateShortcut($"{n} - {DesktopControls[n - 1].DesktopName.Text}",
                                      Path.GetFullPath(Tools.ToolbarDirectory),
                                      "dotnet.exe",
                                      $"\"{Assembly.GetExecutingAssembly().Location}\" {n}",
                                      Tools.WindowStyle.Minimized,
-                                     string.IsNullOrEmpty(desktops[n - 1].Name) ? $"Desktop {n}" : desktops[n - 1].Name,
-                                     Path.GetFullPath($"Icons\\{(n <= 10 ? n.ToString() : "desktop")}.ico")
+                                     DesktopControls[n - 1].DesktopName.Text,
+                                     Path.GetFullPath(DesktopControls[n - 1].ImagePath)
                 );
             }
 
             int current = Array.IndexOf(desktops, VirtualDesktop.Current) + 1;
-            Tools.CreateShortcut($"{current} - {VirtualDesktop.Current.Name}",
+            Tools.CreateShortcut($"{current} - {DesktopControls[current - 1].DesktopName.Text}",
                                  Path.GetFullPath(Tools.ToolbarDirectory),
                                  "dotnet.exe",
                                  $"\"{Assembly.GetExecutingAssembly().Location}\" {current}",
                                  Tools.WindowStyle.Minimized,
-                                 string.IsNullOrEmpty(desktops[current - 1].Name) ? $"Desktop {current}" : desktops[current - 1].Name,
-                                 Path.GetFullPath($"Icons\\{(current <= 10 ? current.ToString() : "desktop")}-selected.ico")
+                                 DesktopControls[current - 1].DesktopName.Text,
+                                 Path.GetFullPath(DesktopControls[current - 1].SelectedImagePath)
             );
 
             bool deleted = false;

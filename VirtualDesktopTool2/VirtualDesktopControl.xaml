@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="VirtualDesktopTool2.VirtualDesktopControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VirtualDesktopTool2"
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
+             Height="240" Width="100">
+    <Grid Background="#FF2A2A2A" x:Name="MainGrid">
+        <Image Height="64" Margin="18,9,18,0" Source="/Icons/desktop.ico" VerticalAlignment="Top" Stretch="Fill" StretchDirection="Both" MouseDown="Image_MouseDown" x:Name="IconImage" HorizontalAlignment="Center"></Image>
+        <Label Content="0" Margin="0,142,0,0" Foreground="White" Height="26" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" FontFamily="Consolas" x:Name="DesktopNumber"/>
+        <TextBox Margin="0,168,0,0" Text="Desktop" TextChanged="DesktopName_TextChanged" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" TextAlignment="Center" x:Name="DesktopName" HorizontalAlignment="Center"/>
+        <Image Height="64" Margin="18,78,18,0" Source="/Icons/desktop-selected.ico" VerticalAlignment="Top" Stretch="Fill" StretchDirection="Both" MouseDown="SelectedImage_MouseDown" x:Name="SelectedIconImage" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

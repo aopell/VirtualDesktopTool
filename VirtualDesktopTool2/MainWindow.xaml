@@ -6,8 +6,18 @@
         xmlns:local="clr-namespace:VirtualDesktopTool2"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="497" Width="662">
+        Title="MainWindow" Height="349" Width="1081">
     <Grid>
         <Button Content="Open Toolbar Folder" Click="SelectToolbarFolder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="208" FontSize="16" Height="29"/>
+        <local:VirtualDesktopControl x:Name="Desktop1" SelectedImagePath="Icons/1-selected.ico" ImagePath="Icons/1.ico" Number="1" Margin="10,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"></local:VirtualDesktopControl>
+        <local:VirtualDesktopControl x:Name="Desktop2" SelectedImagePath="Icons/2-selected.ico" ImagePath="Icons/2.ico" Number="2" Margin="115,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop3" SelectedImagePath="Icons/3-selected.ico" ImagePath="Icons/3.ico" Number="3" Margin="220,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop4" SelectedImagePath="Icons/4-selected.ico" ImagePath="Icons/4.ico" Number="4" Margin="325,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop5" SelectedImagePath="Icons/5-selected.ico" ImagePath="Icons/5.ico" Number="5" Margin="430,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop6" SelectedImagePath="Icons/6-selected.ico" ImagePath="Icons/6.ico" Number="6" Margin="535,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop7" SelectedImagePath="Icons/7-selected.ico" ImagePath="Icons/7.ico" Number="7" Margin="640,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop8" SelectedImagePath="Icons/8-selected.ico" ImagePath="Icons/8.ico" Number="8" Margin="745,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop9" SelectedImagePath="Icons/9-selected.ico" ImagePath="Icons/9.ico" Number="9" Margin="850,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
+        <local:VirtualDesktopControl x:Name="Desktop10" SelectedImagePath="Icons/desktop-selected.ico" ImagePath="Icons/desktop.ico" Number="10+" Margin="955,56,0,28" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top"/>
     </Grid>
 </Window>
